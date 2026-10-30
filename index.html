@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión · Sistema de Recepción</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+</head>
+<body class="pagina-login">
+  <main class="tarjeta tarjeta-login">
+    <div class="login-acento" aria-hidden="true"><span>VISITAS</span><strong>Control simple.<br>Accesos claros.</strong></div>
+    <header class="tarjeta-encabezado">
+      <img class="logo-principal" src="img/logo.png" alt="Cuauhtémoc 1202">
+      <h1>Sistema de Recepción</h1>
+      <p class="texto-secundario">Control de visitantes del edificio</p>
+    </header>
+
+    <form id="form-login" novalidate>
+      <div class="campo">
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" name="usuario" autocomplete="username" required autofocus>
+      </div>
+
+      <div class="campo">
+        <label for="contrasena">Contraseña</label>
+        <input type="password" id="contrasena" name="contrasena" autocomplete="current-password" required>
+      </div>
+
+      <p id="login-error" class="alerta alerta-error" role="alert" hidden></p>
+
+      <button type="submit" class="boton boton-primario boton-bloque">Iniciar sesión</button>
+    </form>
+
+    <p class="nota-prototipo">Inicia sesión con la cuenta asignada por el administrador.</p>
+  </main>
+
+  <script src="js/core/storage.js"></script>
+  <script src="data/semilla.js"></script>
+  <script src="js/modelos/roles.js"></script>
+  <script src="js/modelos/empresas.js"></script>
+  <script src="js/servicios/api.js"></script>
+  <script src="js/servicios/auth.js"></script>
+  <script src="js/servicios/visitas.js"></script>
+  <script src="js/paginas/login.js"></script>
+</body>
+</html>

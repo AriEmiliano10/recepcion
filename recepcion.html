@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recepción · Sistema de Recepción</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+</head>
+<body class="pagina-dashboard pagina-recepcion">
+  <!-- Oculto hasta validar que la sesión corresponde al rol RECEPCION -->
+  <div id="app" hidden>
+    <header class="barra-superior">
+      <div class="barra-titulo">
+        <img class="logo-icono" src="img/logo.png" alt="Cuauhtémoc 1202">
+        <div class="marca-panel"><span class="marca-kicker">Centro de control</span><h1>Recepción</h1></div>
+        <span id="sesion-rol" class="insignia"></span>
+      </div>
+      <div class="barra-usuario">
+        <span id="sesion-nombre"></span>
+        <button type="button" id="btn-cerrar-sesion" class="boton boton-secundario">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <main class="contenedor">
+      <section class="hero-panel"><div><span class="hero-kicker">OPERACIÓN EN TIEMPO REAL</span><h2>Panel de recepción</h2><p>Administra accesos, autoriza visitantes y mantén el edificio en movimiento.</p></div><div class="hero-decoracion" aria-hidden="true">◈</div></section>
+      <section class="resumen-grid" id="resumen-visitas"></section>
+      <section class="tarjeta modulo">
+        <div class="modulo-encabezado"><div><h2>Registrar visita</h2><p class="texto-secundario">Programa una visita y genera su folio/QR.</p></div></div>
+        <form id="form-visita" class="form-grid formulario-visita">
+          <div class="form-separador"><span>1</span><div><strong>Datos del visitante</strong><small>Identifica a la persona que solicita el acceso.</small></div></div>
+          <div class="campo"><label for="visitante">Nombre del visitante</label><input id="visitante" required></div>
+          <div class="campo"><label for="identificacion-presentada">&iquest;Presenta identificaci&oacute;n?</label><select id="identificacion-presentada" required><option value="SI">S&iacute;</option><option value="NO">No</option></select></div>
+          <div class="campo campo-identificacion" id="campo-tipo-identificacion"><label for="identificacion-tipo">Tipo de identificaci&oacute;n entregada</label><select id="identificacion-tipo"><option value="">Seleccionar tipo...</option><option value="INE">INE / IFE</option><option value="PASAPORTE">Pasaporte</option></select></div>
+          <p id="aviso-sin-identificacion" class="alerta alerta-advertencia" hidden>La visita se registrar&aacute; sin identificaci&oacute;n. Recepci&oacute;n deber&aacute; validar el acceso con el anfitri&oacute;n.</p>
+          <div class="campo"><label for="empresa-visita">Empresa destino</label><select id="empresa-visita" required></select></div>
+          <div class="campo"><label for="piso-visita">Piso destino</label><select id="piso-visita" required><option value="">Seleccionar piso...</option><option value="1">Piso 1</option><option value="2">Piso 2</option><option value="3">Piso 3</option><option value="4">Piso 4</option><option value="5">Piso 5</option><option value="6">Piso 6</option></select></div>
+          <div class="campo campo-anfitrion"><label for="anfitrion">Persona visitada</label><select id="anfitrion-directorio"><option value="">Seleccionar del directorio...</option><option value="manual">No aparece: registrar persona</option></select><input id="anfitrion" placeholder="Nombre de la persona" required><input id="anfitrion-puesto" placeholder="Puesto o cargo"></div>
+          <div class="form-separador"><span>2</span><div><strong>Destino de la visita</strong><small>Indica a quién busca y por qué motivo.</small></div></div>
+          <div class="campo"><label for="motivo">Motivo</label><input id="motivo" required></div>
+          <div class="form-separador"><span>3</span><div><strong>Fecha y horario</strong><small>Programa el momento de llegada.</small></div></div>
+          <div class="campo"><label for="fecha-visita">Fecha</label><input type="date" id="fecha-visita" required></div>
+          <div class="campo"><label for="hora-visita">Hora</label><input type="time" id="hora-visita" required></div>
+          <button class="boton boton-primario" type="submit">Crear visita</button>
+        </form><p id="mensaje-visita" class="alerta" hidden></p>
+      </section>
+      <section class="tarjeta modulo"><div class="modulo-encabezado"><h2>Visitas y control de acceso</h2><button class="boton boton-secundario" id="btn-directorio" type="button">Directorio</button></div><div id="tabla-visitas" class="tabla-contenedor"></div></section>
+      <section class="tarjeta modulo" id="directorio" hidden><div class="modulo-encabezado"><div><h2>Directorio del edificio</h2><p class="texto-secundario">Contactos organizados por piso.</p></div></div><div id="lista-directorio" class="directorio-grid"></div></section>
+    </main>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="data/semilla.js"></script>
+  <script src="js/modelos/roles.js"></script>
+  <script src="js/modelos/empresas.js"></script>
+  <script src="js/modelos/directorio.js"></script>
+  <script src="js/servicios/api.js"></script>
+  <script src="js/servicios/auth.js"></script>
+  <script src="js/servicios/visitas.js"></script>
+  <script src="js/ui/encabezado.js"></script>
+  <script src="js/vendor-qrcode.min.js"></script>
+  <script src="js/paginas/visitas-ui.js"></script>
+  <script src="js/paginas/recepcion.js"></script>
+</body>
+</html>
