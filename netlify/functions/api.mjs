@@ -384,4 +384,22 @@ export function createHandler(createSql = (connectionString) => neon(connectionS
   };
 }
 
-export default createHandler();
+const lambdaHandler = createHandler();
+
+export default async function handler(request) {
+  const url = new URL(request.url);
+  const headers = Object.fromEntries(request.headers.entries());
+  const body = request.method === "GET" || request.method === "HEAD" ? "" : await request.text();
+  const event = {
+    httpMethod: request.method,
+    headers,
+    rawUrl: request.url,
+    body,
+    queryStringParameters: Object.fromEntries(url.searchParams.entries())
+  };
+  const result = await lambdaHandler(event);
+  return new Response(result.body, {
+    status: result.statusCode || 200,
+    headers: result.headers
+  });
+}
